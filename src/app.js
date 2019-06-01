@@ -23,7 +23,7 @@ export default class App extends Component {
         dateOnly: true
     }
     dateRangeConfig = {
-        maxDate: new Date('2019-06-01 09:00'),
+        maxDate: new Date('2019-06-10 09:00'),
         start: new Date()
     }
     menuConfig = {
@@ -107,6 +107,7 @@ export default class App extends Component {
         <>
                 <CcDatePicker config={this.dataPickerConfig}/>
                 <div style={{color: 'red', fontWeight: 700}}>混合测试，啦啦啦</div>
+                <CcDateRange config={this.dateRangeConfig}></CcDateRange>
                 <CcMenu config={this.menuConfig}></CcMenu>
                 <Route path="/customerInsight/cusstomer-assets/preview" component={CcLoading}></Route>
 

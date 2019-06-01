@@ -1,4 +1,6 @@
 import angular from 'angular';
+
+// 这些均属于外部依赖，应该由外部传入！！
 import uiRouter from 'angular-ui-router';
 import ngResource from 'angular-resource';
 import ccmsComponents from 'ccms-components';
@@ -7,10 +9,10 @@ import customerView from 'ccms-customer-view';
 import gridManager from 'gridmanager-angular-1.x';
 import 'gridmanager-ccms-skin';
 
-const MODULE_NAME = '__hybird__';
-const CONTROLLER_NAME = '__hybridController__';
+let MODULE_NAME = '__hybird__';
+let CONTROLLER_NAME = '__hybridController__';
 
-const dependencies =  [uiRouter, ngResource, ccmsComponents, ccmsBusinessComponents, customerView, gridManager];
+let dependencies =  [uiRouter, ngResource, ccmsComponents, ccmsBusinessComponents, customerView, gridManager];
 
 
 /**
@@ -23,19 +25,29 @@ export function ngInit(dom, cb, stateList) {
     if (!dom) throw new Error('cannot find angular root dom');
     dom.setAttribute('ng-app', MODULE_NAME);
     dom.setAttribute('ng-controller', CONTROLLER_NAME);
+    
     angular.module(MODULE_NAME, dependencies)
-    .controller(CONTROLLER_NAME, function() {
-        cb.apply(this)
-    })
-    .config($stateProvider => {
-        stateList.forEach(({state, url}) => {
-            $stateProvider.state(state, { url });
+        .controller(CONTROLLER_NAME, function() {
+            cb.apply(this)
         })
-    })
+        .config($stateProvider => {
+            stateList.forEach(({state, url}) => {
+                $stateProvider.state(state, { url });
+            })
+        })
 }
 
 export function registerDependencies(arr) {
-    dependencies.push(...arr);
+    // dependencies.push(...arr);
+    if (Array.isArray(arr) || arr.length > 0) dependencies = arr;
+}
+
+export function registerModuleName(name) {
+    MODULE_NAME = name;
+}
+
+export function registerControllerName(name){
+    CONTROLLER_NAME = name;
 }
 
 
