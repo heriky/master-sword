@@ -1,19 +1,10 @@
 import angular from 'angular';
 
 // 这些均属于外部依赖，应该由外部传入！！
-import uiRouter from 'angular-ui-router';
-import ngResource from 'angular-resource';
-import ccmsComponents from 'ccms-components';
-import ccmsBusinessComponents from '@shuyun/ccms-business-components';
-import customerView from 'ccms-customer-view';
-import gridManager from 'gridmanager-angular-1.x';
-import 'gridmanager-ccms-skin';
-
 let MODULE_NAME = '__hybird__';
 let CONTROLLER_NAME = '__hybridController__';
 
-let dependencies =  [uiRouter, ngResource, ccmsComponents, ccmsBusinessComponents, customerView, gridManager];
-
+let dependencies =  [];
 
 /**
  * 为angular提供运行与编译环境

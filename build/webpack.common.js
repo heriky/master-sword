@@ -72,29 +72,6 @@
    exclude: /node_modules/
  }];
  
- const cssModuleLoader = [{
-   test: /\.css$/,
-   use: [
-     MiniCssExtractPlugin.loader,
-     {
-       loader: 'css-loader',
-       options: {
-         modules: true,
-         localIdentName: '[name]__[local]__[hash:base64:5]'
-       }
-     },
-     'postcss-loader'
-   ]
- }, {
-   test: /\.less$/,
-   use: [
-     // devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-     MiniCssExtractPlugin.loader,
-     'css-loader',
-     'postcss-loader',
-     'less-loader'
-   ]
- }];
  
  const lessLoader = [{
    test: /\.css$/,
@@ -188,18 +165,12 @@
  
  
  module.exports = {
-   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-   entry: srcDir + '/index.js',
-   output: {
-     filename: '[name]-[hash:20].min.js',
-     path: buildPath
+   externals: {
+         'angular': 'angular',
+         'angular-resource': '\'ngResource\'',
+         'angular-ui-router': '\'ui.router\'',
+         'ccms-components': '\'ccms.components\''
    },
-//    externals: {
-//          'angular': 'angular',
-//          'angular-resource': '\'ngResource\'',
-//          'angular-ui-router': '\'ui.router\'',
-//          'ccms-components': '\'ccms.components\''
-//    },
    resolve: {
      alias: {
        '@': srcDir
