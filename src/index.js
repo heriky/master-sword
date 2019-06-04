@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 
 import App from './app';
 
-import { ngInit, registerDependencies } from './utils/initializer-switch';
+import { ngInitOnDOM, registerDependencies } from './utils/initializer-switch';
 
 import { routesConfig } from './config';
 
@@ -21,6 +21,6 @@ const container = document.querySelector('#app')
 let dependencies =  [uiRouter, ngResource, ccmsComponents, ccmsBusinessComponents, customerView, gridManager];
 registerDependencies(dependencies);
 
-ngInit(container, () => {
+ngInitOnDOM(container, () => {
     ReactDOM.render(<App />, container);
 }, routesConfig);

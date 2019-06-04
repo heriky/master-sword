@@ -63,26 +63,22 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-hot-middleware": "^2.24.2",
-    "webpack-merge": "^4.1.4"
-  },
-  "dependencies": {
+    "webpack-merge": "^4.1.4",
     "@shuyun/ccms-business-components": "^0.0.18",
-    "angular": "1.5.8",
-    "angular-es-utils": "^2.0.0",
     "angular-resource": "1.5.8",
-    "angular-ui-router": "^0.2.18",
-    "angular-utils": "0.1.6",
-    "antd": "^3.17.0",
     "ccms-components": "2.37.14",
     "ccms-customer-view": "^0.1.12",
     "crypto-js": "^3.1.9-1",
     "gridmanager-angular-1.x": "0.1.12",
     "gridmanager-ccms-skin": "0.1.7",
-    "jeasy": "^0.0.8",
-    "ng-mate": "0.0.10",
+    "react-router-dom": "^5.0.0"
+  },
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-es-utils": "^2.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.4",
-    "react-router-dom": "^5.0.0",
+    "angular-ui-router": "^0.2.18",
     "ui-router-extras": "^0.1.2"
   }
 }
