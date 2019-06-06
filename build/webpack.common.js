@@ -14,6 +14,8 @@
   *   2. 生产模式下的需要uglyfyJs和optimizeCssAssetsPlugin
   */
 
+const path = require('path');
+
  const HTMLPlugin = require('html-webpack-plugin');
  const CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -67,8 +69,8 @@
  // 系列loaders的配置
  const jsLoader = [{
    test: /\.js$/,
-   use: ['babel-loader'],
-   include: srcDir,
+   use: ['babel-loader', 'async-catch-loader'],
+  //  include: srcDir,
    exclude: /node_modules/
  }];
  
@@ -162,6 +164,14 @@
        }
      }]
    }];
+
+const asyncLoader = {
+  test: /async\.js$/,
+  use: [
+    'babel-loader',
+    'async-catch-loader'
+  ]
+}
  
  
  module.exports = {
@@ -181,6 +191,9 @@
    plugins,
    module: {
      rules: [...jsLoader, ...lessLoader, ...htmlLoader, ...fontLoader, ...picLoader]
-   }
+   },
+   resolveLoader: {
+    modules: [path.resolve(__dirname, '../project-scripts/loaders') ,'node_modules']
+  }
  };
  

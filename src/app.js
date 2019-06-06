@@ -11,10 +11,14 @@ import CcRadio from './components/cc-radio';
 import CcToggle from './components/cc-toggle';
 import CcToolTip from './components/cc-tooltip';
 import CcTabSet from './components/cc-tabset';
-import GridManager from './components/grid-manager';
+// import GridManager from './components/grid-manager';
 
 import { getService } from './utils/component-switch'
 import { HashRouter, Route } from 'react-router-dom';
+
+import GridManagerRc, {$gridManager} from 'gridmanager-react';
+import 'gridmanager-react/css/gm-react.css';
+
 
 export default class App extends Component {
 
@@ -66,15 +70,17 @@ export default class App extends Component {
 
     gmOpts =  {
         gridManagerName: 'grade-change-gm',
-        supportAjaxPage: true,
+        supportAjaxPage: false,
         supportDrag: false,
         supportAdjust: false,
         supportSorting: true,
         isIconFollowText: true,
+        supportAutoOrder: false,
         pageSize: 10,
         ajax_data: (setting, qs) => {
+            console.log(9999);
             return Promise.resolve({
-                list: [{ name: 'hankang', age: 28}, { name: '吃饭', age: 12 }, { name: '打游戏', age: 22 }],
+                data: [{ name: 'hankang', age: 28}, { name: '吃饭', age: 12 }, { name: '打游戏', age: 22 }],
                 pageSize: 10,
                 pageNum: 1,
                 totals: 2
@@ -85,14 +91,22 @@ export default class App extends Component {
         columnData: [{
             key: 'name',
             text: '平台账号',
-            align: 'center'
+            align: 'center',
+            template(value, row) {
+                console.log(row);
+                return <span>{row.name}</span>
+            }
         }, {
             key: 'age',
             text: '年龄',
             align: 'center',
-            template: () => '<span style="color:red" ng-click="$ctrl.gridClick(row)">当前年龄为{{row.name}}</span>'
+            template: <Te onClick={this.showName}>韩韩韩韩康</Te>
         }]
     };
+
+    showName(name) {
+        alert(name);
+    }
 
     gridClick(row) {
         alert(row.name);
@@ -103,6 +117,7 @@ export default class App extends Component {
     }
 
     render() {
+        console.log(111);
         return <HashRouter>
         <>
                 <CcDatePicker config={this.dataPickerConfig}/>
@@ -124,7 +139,10 @@ export default class App extends Component {
                 <CcTabSet config={{active: 0, list: [{ title: '基准积分标准' }, { title: '奖励积分规则' }]}} onSelect={v => console.log(v)}>
                 </CcTabSet>
 
-                <GridManager context={this} option={this.gmOpts}></GridManager>
+                {/* <GridManager context={this} option={this.gmOpts}></GridManager> */}
+                <Route path="/customerInsight/cusstomer-assets/preview" render={() => {
+                    return <GridManagerRc option={this.gmOpts}></GridManagerRc>
+                }}></Route>
                 <Te config={this.state.config}></Te>
                 <button onClick={() => {this.setState({ config: { name: this.state.config.name + Date.now() } })}}>测试</button>
         </>
@@ -135,7 +153,8 @@ export default class App extends Component {
 
 class Te extends PureComponent {
     render() {
-        return <div>{this.props.config.name}</div>
+        const { children, onClick, row } = this.props;
+        return <div onClick={() => onClick(children)}>{children}</div>
     }
 }
 
