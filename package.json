@@ -85,7 +85,7 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "angular": "1.5.8",
+    "angular": "1.8.3",
     "angular-es-utils": "^2.0.0",
     "angular-ui-router": "^0.2.18",
     "gridmanager-react": "0.0.1-2",
